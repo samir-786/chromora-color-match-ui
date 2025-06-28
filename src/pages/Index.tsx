@@ -35,10 +35,10 @@ const Index = () => {
             {/* Left Content */}
             <div className="space-y-6">
               <h1 className="text-5xl lg:text-6xl font-bold text-black leading-tight">
-                AI Color Grading Online
+                Turn Ordinary Footage Into Visual Masterpieces.
               </h1>
               <p className="text-gray-700 text-lg leading-relaxed">
-                Boost images color grading! Swiftly transfers a ref photo's color style to your image in one click, like style of painting, film stock, HDR, duotone and more. Streamline color correction process and shine with Chromora AI Color Match!
+                Chromora lets you color grade images and videos using smart AI, cinematic presets, and advanced tone matching — no editing skills needed.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-all duration-300 transform hover:scale-105">
