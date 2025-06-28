@@ -2,6 +2,8 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Upload, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -17,14 +19,16 @@ const Index = () => {
         
         <div className="hidden md:flex items-center space-x-8">
           <a href="#" className="text-sm font-medium hover:text-gray-600 transition-colors">Chromora iPad</a>
-          <a href="#" className="text-sm font-medium hover:text-gray-600 transition-colors">Features</a>
+          <Link to="/features" className="text-sm font-medium hover:text-gray-600 transition-colors">Features</Link>
           <a href="#" className="text-sm font-medium hover:text-gray-600 transition-colors">Resources</a>
-          <a href="#" className="text-sm font-medium hover:text-gray-600 transition-colors">Pricing</a>
+          <Link to="/pricing" className="text-sm font-medium hover:text-gray-600 transition-colors">Pricing</Link>
           <a href="#" className="text-sm font-medium hover:text-gray-600 transition-colors">Support</a>
           <a href="#" className="text-sm font-medium hover:text-gray-600 transition-colors">Download</a>
-          <Button className="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors">
-            Sign in
-          </Button>
+          <Link to="/login">
+            <Button className="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors">
+              Sign in
+            </Button>
+          </Link>
         </div>
       </nav>
 
@@ -107,6 +111,8 @@ const Index = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
