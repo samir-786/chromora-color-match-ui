@@ -5,7 +5,6 @@ import { Upload, Zap, Wand2, Palette, Clock, Users, Shield, Check } from "lucide
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 import { Feature } from "@/components/ui/feature-with-image-comparison";
-
 const Index = () => {
   const features = [{
     icon: Wand2,
@@ -104,13 +103,7 @@ const Index = () => {
 
             {/* Right Interactive Image Comparison */}
             <div className="relative">
-              <Feature
-                beforeImage="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1920&h=1080&q=80"
-                afterImage="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1920&h=1080&q=80"
-                title="AI-Powered Color Transformation"
-                description="Drag the slider to see the dramatic difference our AI color grading makes to your footage."
-                badgeText="Interactive Demo"
-              />
+              <Feature beforeImage="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1920&h=1080&q=80" afterImage="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1920&h=1080&q=80" title="AI-Powered Color Transformation" description="Drag the slider to see the dramatic difference our AI color grading makes to your footage." badgeText="Interactive Demo" />
             </div>
           </div>
         </div>
@@ -202,7 +195,7 @@ const Index = () => {
             <Button className="bg-white text-black px-8 py-3 rounded-full hover:bg-gray-100 transition-colors">
               Start Free Trial
             </Button>
-            <Button variant="outline" className="border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition-colors">
+            <Button variant="outline" className="border-white px-8 py-3 rounded-full hover:bg-white transition-colors text-gray-950">
               View Pricing
             </Button>
           </div>
@@ -212,5 +205,4 @@ const Index = () => {
       <Footer />
     </div>;
 };
-
 export default Index;
