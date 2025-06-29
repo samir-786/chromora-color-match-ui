@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,32 +7,79 @@ import { Link } from "react-router-dom";
 import { Footer } from "@/components/ui/footer-section";
 import { Feature } from "@/components/ui/feature-with-image-comparison";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
+import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
+
 const Index = () => {
-  const features = [{
-    icon: Wand2,
-    title: "Smart AI Color Matching",
-    description: "Advanced AI algorithms automatically match colors from reference images to your footage with precision and speed."
-  }, {
-    icon: Palette,
-    title: "Cinematic Presets",
-    description: "Access professional-grade color presets inspired by blockbuster films and industry-standard looks."
-  }, {
-    icon: Zap,
-    title: "One-Click Processing",
-    description: "Transform your footage instantly with our streamlined workflow - no complex manual adjustments needed."
-  }, {
-    icon: Clock,
-    title: "Real-Time Preview",
-    description: "See your changes instantly with our real-time preview engine, making the editing process seamless."
-  }, {
-    icon: Users,
-    title: "Batch Processing",
-    description: "Apply color grades to multiple clips simultaneously, saving hours of repetitive work."
-  }, {
-    icon: Shield,
-    title: "Professional Quality",
-    description: "Export in high resolution with professional color spaces for broadcast and cinema standards."
-  }];
+  // Features data for the Chromora color grading tool
+  const timelineData = [
+    {
+      id: 1,
+      title: "AI Color Matching",
+      date: "Core Feature",
+      content: "Advanced AI algorithms automatically match colors from reference images to your footage with precision and speed.",
+      category: "AI Technology",
+      icon: Wand2,
+      relatedIds: [2, 3],
+      status: "completed" as const,
+      energy: 95,
+    },
+    {
+      id: 2,
+      title: "Cinematic Presets",
+      date: "Professional",
+      content: "Access professional-grade color presets inspired by blockbuster films and industry-standard looks.",
+      category: "Presets",
+      icon: Palette,
+      relatedIds: [1, 4],
+      status: "completed" as const,
+      energy: 90,
+    },
+    {
+      id: 3,
+      title: "One-Click Processing",
+      date: "Workflow",
+      content: "Transform your footage instantly with our streamlined workflow - no complex manual adjustments needed.",
+      category: "Processing",
+      icon: Zap,
+      relatedIds: [1, 5],
+      status: "completed" as const,
+      energy: 85,
+    },
+    {
+      id: 4,
+      title: "Real-Time Preview",
+      date: "Live Preview",
+      content: "See your changes instantly with our real-time preview engine, making the editing process seamless.",
+      category: "Preview",
+      icon: Clock,
+      relatedIds: [2, 6],
+      status: "in-progress" as const,
+      energy: 80,
+    },
+    {
+      id: 5,
+      title: "Batch Processing",
+      date: "Efficiency",
+      content: "Apply color grades to multiple clips simultaneously, saving hours of repetitive work.",
+      category: "Batch",
+      icon: Users,
+      relatedIds: [3, 6],
+      status: "in-progress" as const,
+      energy: 75,
+    },
+    {
+      id: 6,
+      title: "Professional Export",
+      date: "Output",
+      content: "Export in high resolution with professional color spaces for broadcast and cinema standards.",
+      category: "Export",
+      icon: Shield,
+      relatedIds: [4, 5],
+      status: "pending" as const,
+      energy: 70,
+    },
+  ];
+
   const plans = [{
     name: "Starter",
     price: "$9",
@@ -54,6 +102,7 @@ const Index = () => {
     features: ["Everything in Pro", "Team collaboration tools", "Custom preset creation", "8K export quality", "API access", "Dedicated account manager", "On-premise deployment option"],
     popular: false
   }];
+
   return <div className="min-h-screen bg-gradient-to-b from-[#ffe5e5] to-white">
       {/* Navigation */}
       <nav className="flex justify-between items-center px-6 py-4">
@@ -110,37 +159,17 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Features Section */}
-      <div id="features" className="px-6 py-16 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center space-y-6 mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-black">
-              Powerful Features for Perfect Color Grading
-            </h2>
-            <p className="text-gray-700 text-lg leading-relaxed max-w-2xl mx-auto">
-              Discover the advanced tools and AI-powered features that make Chromora the ultimate solution for professional color grading.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => <div key={index} className="relative">
-                <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} />
-                <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full relative">
-                  <CardHeader className="text-center">
-                    <div className="mx-auto w-16 h-16 bg-black rounded-full flex items-center justify-center mb-4">
-                      <feature.icon className="w-8 h-8 text-white" />
-                    </div>
-                    <CardTitle className="text-xl font-bold">{feature.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-gray-700 text-center">
-                      {feature.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              </div>)}
-          </div>
+      {/* Features Section - Radial Orbital Timeline */}
+      <div id="features" className="bg-black">
+        <div className="text-center pt-16 pb-8 px-6">
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+            Explore Chromora's Features
+          </h2>
+          <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+            Click on any feature to discover how our advanced AI-powered color grading tools can transform your creative workflow.
+          </p>
         </div>
+        <RadialOrbitalTimeline timelineData={timelineData} />
       </div>
 
       {/* Pricing Section */}
@@ -199,7 +228,6 @@ const Index = () => {
             <Button className="bg-white text-black px-8 py-3 rounded-full hover:bg-gray-100 transition-colors">
               Start Free Trial
             </Button>
-            
           </div>
         </div>
       </div>
