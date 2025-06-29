@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { Footer } from "@/components/ui/footer-section";
 import { Feature } from "@/components/ui/feature-with-image-comparison";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
-
 const Index = () => {
   const features = [{
     icon: Wand2,
@@ -124,16 +123,8 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <div key={index} className="relative">
-                <GlowingEffect
-                  spread={40}
-                  glow={true}
-                  disabled={false}
-                  proximity={64}
-                  inactiveZone={0.01}
-                  borderWidth={2}
-                />
+            {features.map((feature, index) => <div key={index} className="relative">
+                <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} />
                 <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full relative">
                   <CardHeader className="text-center">
                     <div className="mx-auto w-16 h-16 bg-black rounded-full flex items-center justify-center mb-4">
@@ -147,8 +138,7 @@ const Index = () => {
                     </CardDescription>
                   </CardContent>
                 </Card>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </div>
@@ -209,9 +199,7 @@ const Index = () => {
             <Button className="bg-white text-black px-8 py-3 rounded-full hover:bg-gray-100 transition-colors">
               Start Free Trial
             </Button>
-            <Button variant="outline" className="border-white px-8 py-3 rounded-full hover:bg-white transition-colors text-gray-950">
-              View Pricing
-            </Button>
+            
           </div>
         </div>
       </div>
@@ -219,5 +207,4 @@ const Index = () => {
       <Footer />
     </div>;
 };
-
 export default Index;
