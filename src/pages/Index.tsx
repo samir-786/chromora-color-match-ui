@@ -85,7 +85,7 @@ const Index = () => {
               <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-center text-teal-900">
                 Turn Ordinary Footage Into Visual Masterpieces.
               </h1>
-              <p className="text-gray-700 text-lg leading-relaxed">
+              <p className="text-gray-700 text-lg leading-relaxed text-center">
                 Chromora lets you color grade images and videos using smart AI, cinematic presets, and advanced tone matching — no editing skills needed.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
