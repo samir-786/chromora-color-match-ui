@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Upload, Zap, Wand2, Palette, Clock, Users, Shield, Check } from "lucide-react";
 import { Link } from "react-router-dom";
-import Footer from "@/components/Footer";
+import { Footer } from "@/components/ui/footer-section";
 import { Feature } from "@/components/ui/feature-with-image-comparison";
+
 const Index = () => {
   const features = [{
     icon: Wand2,
@@ -205,4 +206,5 @@ const Index = () => {
       <Footer />
     </div>;
 };
+
 export default Index;
