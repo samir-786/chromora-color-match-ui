@@ -5,6 +5,7 @@ import { Upload, Zap, Wand2, Palette, Clock, Users, Shield, Check } from "lucide
 import { Link } from "react-router-dom";
 import { Footer } from "@/components/ui/footer-section";
 import { Feature } from "@/components/ui/feature-with-image-comparison";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 const Index = () => {
   const features = [{
@@ -123,19 +124,31 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardHeader className="text-center">
-                  <div className="mx-auto w-16 h-16 bg-black rounded-full flex items-center justify-center mb-4">
-                    <feature.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle className="text-xl font-bold">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-gray-700 text-center">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>)}
+            {features.map((feature, index) => (
+              <div key={index} className="relative">
+                <GlowingEffect
+                  spread={40}
+                  glow={true}
+                  disabled={false}
+                  proximity={64}
+                  inactiveZone={0.01}
+                  borderWidth={2}
+                />
+                <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full relative">
+                  <CardHeader className="text-center">
+                    <div className="mx-auto w-16 h-16 bg-black rounded-full flex items-center justify-center mb-4">
+                      <feature.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <CardTitle className="text-xl font-bold">{feature.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-gray-700 text-center">
+                      {feature.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
           </div>
         </div>
       </div>
