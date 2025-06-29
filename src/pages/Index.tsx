@@ -1,96 +1,58 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Upload, Zap, Wand2, Palette, Clock, Users, Shield, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
-
 const Index = () => {
-  const features = [
-    {
-      icon: Wand2,
-      title: "Smart AI Color Matching",
-      description: "Advanced AI algorithms automatically match colors from reference images to your footage with precision and speed."
-    },
-    {
-      icon: Palette,
-      title: "Cinematic Presets",
-      description: "Access professional-grade color presets inspired by blockbuster films and industry-standard looks."
-    },
-    {
-      icon: Zap,
-      title: "One-Click Processing",
-      description: "Transform your footage instantly with our streamlined workflow - no complex manual adjustments needed."
-    },
-    {
-      icon: Clock,
-      title: "Real-Time Preview",
-      description: "See your changes instantly with our real-time preview engine, making the editing process seamless."
-    },
-    {
-      icon: Users,
-      title: "Batch Processing",
-      description: "Apply color grades to multiple clips simultaneously, saving hours of repetitive work."
-    },
-    {
-      icon: Shield,
-      title: "Professional Quality",
-      description: "Export in high resolution with professional color spaces for broadcast and cinema standards."
-    }
-  ];
-
-  const plans = [
-    {
-      name: "Starter",
-      price: "$9",
-      period: "/month",
-      description: "Perfect for individual creators just getting started",
-      features: [
-        "Up to 50 video exports per month",
-        "Basic AI color matching",
-        "5 cinematic presets",
-        "720p export quality",
-        "Email support"
-      ],
-      popular: false
-    },
-    {
-      name: "Pro",
-      price: "$29",
-      period: "/month",
-      description: "Ideal for professional content creators and small teams",
-      features: [
-        "Unlimited video exports",
-        "Advanced AI color matching",
-        "50+ cinematic presets",
-        "4K export quality",
-        "Batch processing",
-        "Priority support",
-        "Custom color profiles"
-      ],
-      popular: true
-    },
-    {
-      name: "Studio",
-      price: "$99",
-      period: "/month",
-      description: "Built for production studios and large teams",
-      features: [
-        "Everything in Pro",
-        "Team collaboration tools",
-        "Custom preset creation",
-        "8K export quality",
-        "API access",
-        "Dedicated account manager",
-        "On-premise deployment option"
-      ],
-      popular: false
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-[#ffe5e5] to-white">
+  const features = [{
+    icon: Wand2,
+    title: "Smart AI Color Matching",
+    description: "Advanced AI algorithms automatically match colors from reference images to your footage with precision and speed."
+  }, {
+    icon: Palette,
+    title: "Cinematic Presets",
+    description: "Access professional-grade color presets inspired by blockbuster films and industry-standard looks."
+  }, {
+    icon: Zap,
+    title: "One-Click Processing",
+    description: "Transform your footage instantly with our streamlined workflow - no complex manual adjustments needed."
+  }, {
+    icon: Clock,
+    title: "Real-Time Preview",
+    description: "See your changes instantly with our real-time preview engine, making the editing process seamless."
+  }, {
+    icon: Users,
+    title: "Batch Processing",
+    description: "Apply color grades to multiple clips simultaneously, saving hours of repetitive work."
+  }, {
+    icon: Shield,
+    title: "Professional Quality",
+    description: "Export in high resolution with professional color spaces for broadcast and cinema standards."
+  }];
+  const plans = [{
+    name: "Starter",
+    price: "$9",
+    period: "/month",
+    description: "Perfect for individual creators just getting started",
+    features: ["Up to 50 video exports per month", "Basic AI color matching", "5 cinematic presets", "720p export quality", "Email support"],
+    popular: false
+  }, {
+    name: "Pro",
+    price: "$29",
+    period: "/month",
+    description: "Ideal for professional content creators and small teams",
+    features: ["Unlimited video exports", "Advanced AI color matching", "50+ cinematic presets", "4K export quality", "Batch processing", "Priority support", "Custom color profiles"],
+    popular: true
+  }, {
+    name: "Studio",
+    price: "$99",
+    period: "/month",
+    description: "Built for production studios and large teams",
+    features: ["Everything in Pro", "Team collaboration tools", "Custom preset creation", "8K export quality", "API access", "Dedicated account manager", "On-premise deployment option"],
+    popular: false
+  }];
+  return <div className="min-h-screen bg-gradient-to-b from-[#ffe5e5] to-white">
       {/* Navigation */}
       <nav className="flex justify-between items-center px-6 py-4">
         <div className="flex items-center space-x-2">
@@ -120,7 +82,7 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="space-y-6">
-              <h1 className="text-5xl lg:text-6xl font-bold text-black leading-tight">
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-center text-teal-900">
                 Turn Ordinary Footage Into Visual Masterpieces.
               </h1>
               <p className="text-gray-700 text-lg leading-relaxed">
@@ -207,8 +169,7 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            {features.map((feature, index) => <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardHeader className="text-center">
                   <div className="mx-auto w-16 h-16 bg-black rounded-full flex items-center justify-center mb-4">
                     <feature.icon className="w-8 h-8 text-white" />
@@ -220,8 +181,7 @@ const Index = () => {
                     {feature.description}
                   </CardDescription>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </div>
@@ -239,15 +199,12 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {plans.map((plan, index) => (
-              <Card key={index} className={`relative border-0 shadow-lg hover:shadow-xl transition-all duration-300 ${plan.popular ? 'ring-2 ring-black scale-105' : ''}`}>
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+            {plans.map((plan, index) => <Card key={index} className={`relative border-0 shadow-lg hover:shadow-xl transition-all duration-300 ${plan.popular ? 'ring-2 ring-black scale-105' : ''}`}>
+                {plan.popular && <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-black text-white px-4 py-1 rounded-full text-sm font-medium">
                       Most Popular
                     </span>
-                  </div>
-                )}
+                  </div>}
                 <CardHeader className="text-center pb-4">
                   <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
                   <div className="flex items-baseline justify-center">
@@ -260,19 +217,16 @@ const Index = () => {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <ul className="space-y-3">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center">
+                    {plan.features.map((feature, featureIndex) => <li key={featureIndex} className="flex items-center">
                         <Check className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
                         <span className="text-gray-700">{feature}</span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                   <Button className={`w-full py-3 rounded-full transition-colors ${plan.popular ? 'bg-black text-white hover:bg-gray-800' : 'border border-black text-black hover:bg-black hover:text-white'}`}>
                     Get Started
                   </Button>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </div>
@@ -296,8 +250,6 @@ const Index = () => {
       </div>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
