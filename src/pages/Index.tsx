@@ -4,6 +4,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Upload, Zap, Wand2, Palette, Clock, Users, Shield, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
+import { Feature } from "@/components/ui/feature-with-image-comparison";
+
 const Index = () => {
   const features = [{
     icon: Wand2,
@@ -100,57 +102,15 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Right Image Mockup */}
+            {/* Right Interactive Image Comparison */}
             <div className="relative">
-              <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border">
-                {/* Browser-like header */}
-                <div className="bg-gray-100 px-4 py-3 flex items-center space-x-2">
-                  <div className="flex space-x-2">
-                    <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                  </div>
-                  <div className="flex-1 flex justify-center">
-                    <div className="bg-white px-3 py-1 rounded text-xs text-gray-600">
-                      chromora.ai
-                    </div>
-                  </div>
-                </div>
-
-                {/* Main image area */}
-                <div className="relative bg-gradient-to-br from-green-100 to-blue-100 h-80 flex items-center justify-center">
-                  {/* Simulated image with couple */}
-                  <div className="w-full h-full bg-gradient-to-br from-green-200 via-yellow-100 to-blue-200 relative overflow-hidden">
-                    {/* Simulated landscape scene */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-blue-200 via-green-200 to-green-300"></div>
-                    
-                    {/* Before/After labels */}
-                    <div className="absolute top-4 left-4 bg-white text-black px-3 py-1 text-xs rounded-md shadow-lg font-medium">
-                      Before
-                    </div>
-                    <div className="absolute top-4 left-20 bg-yellow-400 text-black px-3 py-1 text-xs rounded-md shadow-lg font-medium">
-                      After
-                    </div>
-
-                    {/* Color Reference panel */}
-                    <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-2">
-                      <div className="w-16 h-16 bg-gradient-to-br from-orange-200 to-pink-200 rounded border-2 border-yellow-400 mb-2"></div>
-                      <div className="text-xs text-center font-medium text-gray-700">Color Reference</div>
-                    </div>
-
-                    {/* Divider line */}
-                    <div className="absolute top-0 bottom-0 left-1/2 w-0.5 bg-white opacity-75"></div>
-                  </div>
-                </div>
-
-                {/* Bottom toolbar */}
-                <div className="bg-gray-50 px-4 py-3 flex justify-center space-x-2">
-                  <div className="w-8 h-6 bg-green-400 rounded"></div>
-                  <div className="w-8 h-6 bg-gradient-to-r from-orange-300 to-yellow-300 rounded"></div>
-                  <div className="w-8 h-6 bg-gradient-to-r from-purple-300 to-blue-300 rounded"></div>
-                  <div className="w-8 h-6 bg-gradient-to-r from-red-300 to-pink-300 rounded"></div>
-                </div>
-              </div>
+              <Feature
+                beforeImage="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1920&h=1080&q=80"
+                afterImage="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1920&h=1080&q=80"
+                title="AI-Powered Color Transformation"
+                description="Drag the slider to see the dramatic difference our AI color grading makes to your footage."
+                badgeText="Interactive Demo"
+              />
             </div>
           </div>
         </div>
@@ -252,4 +212,5 @@ const Index = () => {
       <Footer />
     </div>;
 };
+
 export default Index;
