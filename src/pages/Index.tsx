@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,7 +7,7 @@ import { Footer } from "@/components/ui/footer-section";
 import { Feature } from "@/components/ui/feature-with-image-comparison";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
-import { Waves } from "@/components/ui/waves-background";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 
 const Index = () => {
   // Features data for the Chromora color grading tool
@@ -106,23 +105,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Hero Section with Waves Background */}
-      <div className="relative min-h-screen overflow-hidden">
-        {/* Animated Background only for hero */}
-        <Waves
-          lineColor="rgba(20, 184, 166, 0.4)"
-          backgroundColor="transparent"
-          waveSpeedX={0.015}
-          waveSpeedY={0.008}
-          waveAmpX={35}
-          waveAmpY={18}
-          friction={0.92}
-          tension={0.008}
-          maxCursorMove={80}
-          xGap={15}
-          yGap={40}
-          className="absolute inset-0 z-0"
-        />
+      {/* Hero Section with BackgroundBeams */}
+      <div className="relative min-h-screen overflow-hidden bg-black">
+        {/* BackgroundBeams Background only for hero */}
+        <BackgroundBeams className="absolute inset-0 z-0" />
 
         {/* Content */}
         <div className="relative z-10">
