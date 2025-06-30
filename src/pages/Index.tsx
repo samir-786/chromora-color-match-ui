@@ -8,6 +8,7 @@ import { Feature } from "@/components/ui/feature-with-image-comparison";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
 import { BackgroundBeams } from "@/components/ui/background-beams";
+
 const Index = () => {
   // Features data for the Chromora color grading tool
   const timelineData = [{
@@ -168,7 +169,9 @@ const Index = () => {
             Click on any feature to discover how our advanced AI-powered color grading tools can transform your creative workflow.
           </p>
         </div>
-        <RadialOrbitalTimeline timelineData={timelineData} />
+        <div className="bg-black">
+          <RadialOrbitalTimeline timelineData={timelineData} />
+        </div>
       </div>
 
       {/* Pricing Section - Fully Black Background */}
@@ -208,7 +211,7 @@ const Index = () => {
                         <span className="text-gray-300">{feature}</span>
                       </li>)}
                   </ul>
-                  <Button className={`w-full py-3 rounded-full transition-colors ${plan.popular ? 'bg-gradient-to-r from-teal-500 to-teal-600 text-white hover:from-teal-600 hover:to-teal-700' : 'border border-teal-500 text-teal-400 hover:bg-teal-500 hover:text-white'}`}>
+                  <Button className={`w-full py-3 rounded-full transition-colors ${plan.popular ? 'bg-black text-white border border-white hover:bg-gray-900' : 'bg-black text-white border border-gray-500 hover:bg-gray-900'}`}>
                     Get Started
                   </Button>
                 </CardContent>
@@ -225,7 +228,7 @@ const Index = () => {
             Join thousands of creators who are already using Chromora to create stunning visuals.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-gradient-to-r from-teal-500 to-teal-600 text-white px-8 py-3 rounded-full hover:from-teal-600 hover:to-teal-700 transition-colors">
+            <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-colors">
               Start Free Trial
             </Button>
           </div>
@@ -235,4 +238,5 @@ const Index = () => {
       <Footer />
     </div>;
 };
+
 export default Index;
