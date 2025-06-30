@@ -8,78 +8,69 @@ import { Feature } from "@/components/ui/feature-with-image-comparison";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
 import { BackgroundBeams } from "@/components/ui/background-beams";
-
 const Index = () => {
   // Features data for the Chromora color grading tool
-  const timelineData = [
-    {
-      id: 1,
-      title: "AI Color Matching",
-      date: "Core Feature",
-      content: "Advanced AI algorithms automatically match colors from reference images to your footage with precision and speed.",
-      category: "AI Technology",
-      icon: Wand2,
-      relatedIds: [2, 3],
-      status: "completed" as const,
-      energy: 95,
-    },
-    {
-      id: 2,
-      title: "Cinematic Presets",
-      date: "Professional",
-      content: "Access professional-grade color presets inspired by blockbuster films and industry-standard looks.",
-      category: "Presets",
-      icon: Palette,
-      relatedIds: [1, 4],
-      status: "completed" as const,
-      energy: 90,
-    },
-    {
-      id: 3,
-      title: "One-Click Processing",
-      date: "Workflow",
-      content: "Transform your footage instantly with our streamlined workflow - no complex manual adjustments needed.",
-      category: "Processing",
-      icon: Zap,
-      relatedIds: [1, 5],
-      status: "completed" as const,
-      energy: 85,
-    },
-    {
-      id: 4,
-      title: "Real-Time Preview",
-      date: "Live Preview",
-      content: "See your changes instantly with our real-time preview engine, making the editing process seamless.",
-      category: "Preview",
-      icon: Clock,
-      relatedIds: [2, 6],
-      status: "in-progress" as const,
-      energy: 80,
-    },
-    {
-      id: 5,
-      title: "Batch Processing",
-      date: "Efficiency",
-      content: "Apply color grades to multiple clips simultaneously, saving hours of repetitive work.",
-      category: "Batch",
-      icon: Users,
-      relatedIds: [3, 6],
-      status: "in-progress" as const,
-      energy: 75,
-    },
-    {
-      id: 6,
-      title: "Professional Export",
-      date: "Output",
-      content: "Export in high resolution with professional color spaces for broadcast and cinema standards.",
-      category: "Export",
-      icon: Shield,
-      relatedIds: [4, 5],
-      status: "pending" as const,
-      energy: 70,
-    },
-  ];
-
+  const timelineData = [{
+    id: 1,
+    title: "AI Color Matching",
+    date: "Core Feature",
+    content: "Advanced AI algorithms automatically match colors from reference images to your footage with precision and speed.",
+    category: "AI Technology",
+    icon: Wand2,
+    relatedIds: [2, 3],
+    status: "completed" as const,
+    energy: 95
+  }, {
+    id: 2,
+    title: "Cinematic Presets",
+    date: "Professional",
+    content: "Access professional-grade color presets inspired by blockbuster films and industry-standard looks.",
+    category: "Presets",
+    icon: Palette,
+    relatedIds: [1, 4],
+    status: "completed" as const,
+    energy: 90
+  }, {
+    id: 3,
+    title: "One-Click Processing",
+    date: "Workflow",
+    content: "Transform your footage instantly with our streamlined workflow - no complex manual adjustments needed.",
+    category: "Processing",
+    icon: Zap,
+    relatedIds: [1, 5],
+    status: "completed" as const,
+    energy: 85
+  }, {
+    id: 4,
+    title: "Real-Time Preview",
+    date: "Live Preview",
+    content: "See your changes instantly with our real-time preview engine, making the editing process seamless.",
+    category: "Preview",
+    icon: Clock,
+    relatedIds: [2, 6],
+    status: "in-progress" as const,
+    energy: 80
+  }, {
+    id: 5,
+    title: "Batch Processing",
+    date: "Efficiency",
+    content: "Apply color grades to multiple clips simultaneously, saving hours of repetitive work.",
+    category: "Batch",
+    icon: Users,
+    relatedIds: [3, 6],
+    status: "in-progress" as const,
+    energy: 75
+  }, {
+    id: 6,
+    title: "Professional Export",
+    date: "Output",
+    content: "Export in high resolution with professional color spaces for broadcast and cinema standards.",
+    category: "Export",
+    icon: Shield,
+    relatedIds: [4, 5],
+    status: "pending" as const,
+    energy: 70
+  }];
   const plans = [{
     name: "Starter",
     price: "$9",
@@ -102,9 +93,7 @@ const Index = () => {
     features: ["Everything in Pro", "Team collaboration tools", "Custom preset creation", "8K export quality", "API access", "Dedicated account manager", "On-premise deployment option"],
     popular: false
   }];
-
-  return (
-    <div className="min-h-screen bg-black text-white">
+  return <div className="min-h-screen bg-black text-white">
       {/* Hero Section with BackgroundBeams */}
       <div className="relative min-h-screen overflow-hidden bg-black">
         {/* BackgroundBeams Background only for hero */}
@@ -148,7 +137,7 @@ const Index = () => {
                     Chromora lets you color grade images and videos using smart AI, cinematic presets, and advanced tone matching — no editing skills needed.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Button className="bg-gradient-to-r from-teal-500 to-teal-600 text-white px-8 py-3 rounded-full hover:from-teal-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-105">
+                    <Button className="bg-gradient-to-r from-teal-500 to-teal-600 px-8 py-3 rounded-full hover:from-teal-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-105 text-zinc-950 bg-zinc-950 hover:bg-zinc-800 text-center">
                       <Upload className="w-4 h-4 mr-2" />
                       Upload Image
                     </Button>
@@ -195,24 +184,13 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {plans.map((plan, index) => (
-              <Card key={index} className={`relative border-gray-700 bg-gray-900/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 ${plan.popular ? 'ring-2 ring-teal-500 scale-105' : ''}`}>
-                <GlowingEffect
-                  spread={40}
-                  glow={true}
-                  disabled={false}
-                  proximity={64}
-                  inactiveZone={0.01}
-                  borderWidth={2}
-                  className={plan.popular ? 'opacity-100' : 'opacity-0 hover:opacity-100'}
-                />
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+            {plans.map((plan, index) => <Card key={index} className={`relative border-gray-700 bg-gray-900/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 ${plan.popular ? 'ring-2 ring-teal-500 scale-105' : ''}`}>
+                <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} className={plan.popular ? 'opacity-100' : 'opacity-0 hover:opacity-100'} />
+                {plan.popular && <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-gradient-to-r from-teal-400 to-teal-600 text-white px-4 py-1 rounded-full text-sm font-medium">
                       Most Popular
                     </span>
-                  </div>
-                )}
+                  </div>}
                 <CardHeader className="text-center pb-4">
                   <CardTitle className="text-2xl font-bold text-white">{plan.name}</CardTitle>
                   <div className="flex items-baseline justify-center">
@@ -225,19 +203,16 @@ const Index = () => {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <ul className="space-y-3">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center">
+                    {plan.features.map((feature, featureIndex) => <li key={featureIndex} className="flex items-center">
                         <Check className="w-5 h-5 text-teal-400 mr-3 flex-shrink-0" />
                         <span className="text-gray-300">{feature}</span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                   <Button className={`w-full py-3 rounded-full transition-colors ${plan.popular ? 'bg-gradient-to-r from-teal-500 to-teal-600 text-white hover:from-teal-600 hover:to-teal-700' : 'border border-teal-500 text-teal-400 hover:bg-teal-500 hover:text-white'}`}>
                     Get Started
                   </Button>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </div>
@@ -258,8 +233,6 @@ const Index = () => {
       </div>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
