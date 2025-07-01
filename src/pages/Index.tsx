@@ -6,94 +6,88 @@ import { Link } from "react-router-dom";
 import { Footer } from "@/components/ui/footer-section";
 import { Feature } from "@/components/ui/feature-with-image-comparison";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
-import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
 import { BackgroundBeams } from "@/components/ui/background-beams";
+import { BentoGrid, type BentoItem } from "@/components/ui/bento-grid";
 
 const Index = () => {
-  // Features data for the Chromora color grading tool
-  const timelineData = [{
-    id: 1,
-    title: "AI Color Matching",
-    date: "Core Feature",
-    content: "Advanced AI algorithms automatically match colors from reference images to your footage with precision and speed.",
-    category: "AI Technology",
-    icon: Wand2,
-    relatedIds: [2, 3],
-    status: "completed" as const,
-    energy: 95
-  }, {
-    id: 2,
-    title: "Cinematic Presets",
-    date: "Professional",
-    content: "Access professional-grade color presets inspired by blockbuster films and industry-standard looks.",
-    category: "Presets",
-    icon: Palette,
-    relatedIds: [1, 4],
-    status: "completed" as const,
-    energy: 90
-  }, {
-    id: 3,
-    title: "One-Click Processing",
-    date: "Workflow",
-    content: "Transform your footage instantly with our streamlined workflow - no complex manual adjustments needed.",
-    category: "Processing",
-    icon: Zap,
-    relatedIds: [1, 5],
-    status: "completed" as const,
-    energy: 85
-  }, {
-    id: 4,
-    title: "Real-Time Preview",
-    date: "Live Preview",
-    content: "See your changes instantly with our real-time preview engine, making the editing process seamless.",
-    category: "Preview",
-    icon: Clock,
-    relatedIds: [2, 6],
-    status: "in-progress" as const,
-    energy: 80
-  }, {
-    id: 5,
-    title: "Batch Processing",
-    date: "Efficiency",
-    content: "Apply color grades to multiple clips simultaneously, saving hours of repetitive work.",
-    category: "Batch",
-    icon: Users,
-    relatedIds: [3, 6],
-    status: "in-progress" as const,
-    energy: 75
-  }, {
-    id: 6,
-    title: "Professional Export",
-    date: "Output",
-    content: "Export in high resolution with professional color spaces for broadcast and cinema standards.",
-    category: "Export",
-    icon: Shield,
-    relatedIds: [4, 5],
-    status: "pending" as const,
-    energy: 70
-  }];
-  const plans = [{
-    name: "Starter",
-    price: "$9",
-    period: "/month",
-    description: "Perfect for individual creators just getting started",
-    features: ["Up to 50 video exports per month", "Basic AI color matching", "5 cinematic presets", "720p export quality", "Email support"],
-    popular: false
-  }, {
-    name: "Pro",
-    price: "$29",
-    period: "/month",
-    description: "Ideal for professional content creators and small teams",
-    features: ["Unlimited video exports", "Advanced AI color matching", "50+ cinematic presets", "4K export quality", "Batch processing", "Priority support", "Custom color profiles"],
-    popular: true
-  }, {
-    name: "Studio",
-    price: "$99",
-    period: "/month",
-    description: "Built for production studios and large teams",
-    features: ["Everything in Pro", "Team collaboration tools", "Custom preset creation", "8K export quality", "API access", "Dedicated account manager", "On-premise deployment option"],
-    popular: false
-  }];
+  // Features data for Chromora's BentoGrid
+  const chromoraFeatures: BentoItem[] = [
+    {
+      title: "AI Color Matching",
+      meta: "Advanced AI",
+      description: "Automatically match colors from reference images to your footage with precision and speed",
+      icon: <Wand2 className="w-4 h-4 text-teal-400" />,
+      status: "Live",
+      tags: ["AI", "Precision", "Speed"],
+      colSpan: 2,
+      hasPersistentHover: true,
+    },
+    {
+      title: "Cinematic Presets",
+      meta: "50+ Presets",
+      description: "Professional-grade color presets inspired by blockbuster films and industry standards",
+      icon: <Palette className="w-4 h-4 text-purple-400" />,
+      status: "Updated",
+      tags: ["Professional", "Cinema"],
+    },
+    {
+      title: "One-Click Processing",
+      meta: "Instant",
+      description: "Transform your footage instantly with streamlined workflow - no complex adjustments needed",
+      icon: <Zap className="w-4 h-4 text-yellow-400" />,
+      tags: ["Workflow", "Instant"],
+      colSpan: 2,
+    },
+    {
+      title: "Real-Time Preview",
+      meta: "Live Engine",
+      description: "See your changes instantly with our real-time preview engine for seamless editing",
+      icon: <Clock className="w-4 h-4 text-blue-400" />,
+      status: "Beta",
+      tags: ["Preview", "Real-time"],
+    },
+    {
+      title: "Batch Processing",
+      meta: "Multi-clip",
+      description: "Apply color grades to multiple clips simultaneously, saving hours of work",
+      icon: <Users className="w-4 h-4 text-green-400" />,
+      tags: ["Efficiency", "Batch"],
+    },
+    {
+      title: "Professional Export",
+      meta: "8K Ready",
+      description: "Export in high resolution with professional color spaces for broadcast standards",
+      icon: <Shield className="w-4 h-4 text-red-400" />,
+      status: "Pro",
+      tags: ["Export", "Professional"],
+    },
+  ];
+
+  const plans = [
+    {
+      name: "Starter",
+      price: "$9",
+      period: "/month",
+      description: "Perfect for individual creators just getting started",
+      features: ["Up to 50 video exports per month", "Basic AI color matching", "5 cinematic presets", "720p export quality", "Email support"],
+      popular: false
+    }, {
+      name: "Pro",
+      price: "$29",
+      period: "/month",
+      description: "Ideal for professional content creators and small teams",
+      features: ["Unlimited video exports", "Advanced AI color matching", "50+ cinematic presets", "4K export quality", "Batch processing", "Priority support", "Custom color profiles"],
+      popular: true
+    }, {
+      name: "Studio",
+      price: "$99",
+      period: "/month",
+      description: "Built for production studios and large teams",
+      features: ["Everything in Pro", "Team collaboration tools", "Custom preset creation", "8K export quality", "API access", "Dedicated account manager", "On-premise deployment option"],
+      popular: false
+    }
+  ];
+
   return <div className="min-h-screen bg-black text-white">
       {/* Hero Section with BackgroundBeams */}
       <div className="relative min-h-screen overflow-hidden bg-black">
@@ -159,18 +153,18 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Features Section - Fully Black Background */}
-      <div id="features" className="bg-black">
+      {/* Features Section with BentoGrid - Fully Black Background */}
+      <div id="features" className="bg-black dark">
         <div className="text-center pt-16 pb-8 px-6">
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
             Explore Chromora's Features
           </h2>
           <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-            Click on any feature to discover how our advanced AI-powered color grading tools can transform your creative workflow.
+            Discover how our advanced AI-powered color grading tools can transform your creative workflow with professional-grade features.
           </p>
         </div>
-        <div className="bg-black">
-          <RadialOrbitalTimeline timelineData={timelineData} />
+        <div className="pb-16">
+          <BentoGrid items={chromoraFeatures} />
         </div>
       </div>
 
