@@ -118,7 +118,7 @@ const Index = () => {
               <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Support</a>
               <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Download</a>
               <Link to="/login">
-                <Button className="bg-teal-500 text-white px-6 py-2 rounded-full hover:bg-teal-600 transition-colors">
+                <Button className="bg-black text-white border border-white px-6 py-2 rounded-full hover:bg-gray-900 transition-colors">
                   Sign in
                 </Button>
               </Link>
@@ -138,11 +138,11 @@ const Index = () => {
                     Chromora lets you color grade images and videos using smart AI, cinematic presets, and advanced tone matching — no editing skills needed.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Button className="bg-gradient-to-r from-teal-500 to-teal-600 px-8 py-3 rounded-full hover:from-teal-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-105 text-zinc-950 bg-zinc-950 hover:bg-zinc-800 text-center">
+                    <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 text-center">
                       <Upload className="w-4 h-4 mr-2" />
                       Upload Image
                     </Button>
-                    <Button variant="outline" className="border-2 border-teal-500 text-teal-400 px-8 py-3 rounded-full hover:bg-teal-500 hover:text-white transition-all duration-300">
+                    <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-all duration-300">
                       <Zap className="w-4 h-4 mr-2" />
                       Correct Color Now
                     </Button>
@@ -211,7 +211,7 @@ const Index = () => {
                         <span className="text-gray-300">{feature}</span>
                       </li>)}
                   </ul>
-                  <Button className={`w-full py-3 rounded-full transition-colors ${plan.popular ? 'bg-black text-white border border-white hover:bg-gray-900' : 'bg-black text-white border border-gray-500 hover:bg-gray-900'}`}>
+                  <Button className="w-full py-3 rounded-full bg-black text-white border border-white hover:bg-gray-900 transition-colors">
                     Get Started
                   </Button>
                 </CardContent>
