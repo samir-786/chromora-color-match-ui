@@ -41,39 +41,10 @@ export const UserProfile = () => {
       .from('user_profiles')
       .select('*')
       .eq('user_id', user.id)
-      .maybeSingle();
-
-    if (error) {
-      console.error('Error fetching profile:', error);
-      return;
-    }
-
-    if (!data) {
-      // Profile doesn't exist, create one
-      await createProfile();
-      return;
-    }
-
-    setProfile(data);
-  };
-
-  const createProfile = async () => {
-    if (!user) return;
-
-    const { data, error } = await supabase
-      .from('user_profiles')
-      .insert({
-        user_id: user.id,
-        first_name: user.user_metadata?.first_name || null,
-        last_name: user.user_metadata?.last_name || null,
-        credits: 100,
-        plan: 'starter'
-      })
-      .select()
       .single();
 
     if (error) {
-      console.error('Error creating profile:', error);
+      console.error('Error fetching profile:', error);
       return;
     }
 
