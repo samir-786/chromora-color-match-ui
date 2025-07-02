@@ -37,10 +37,37 @@ const Credits = () => {
       .from('user_profiles')
       .select('credits, plan')
       .eq('user_id', user.id)
-      .single();
+      .maybeSingle();
 
     if (error) {
       console.error('Error fetching profile:', error);
+      return;
+    }
+
+    if (!data) {
+      // Profile doesn't exist, create one
+      await createProfile();
+      return;
+    }
+
+    setProfile(data);
+  };
+
+  const createProfile = async () => {
+    if (!user) return;
+
+    const { data, error } = await supabase
+      .from('user_profiles')
+      .insert({
+        user_id: user.id,
+        credits: 100,
+        plan: 'starter'
+      })
+      .select('credits, plan')
+      .single();
+
+    if (error) {
+      console.error('Error creating profile:', error);
       return;
     }
 
