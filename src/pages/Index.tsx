@@ -128,7 +128,7 @@ const Index = () => {
                   <p className="text-gray-300 text-lg leading-relaxed text-center">
                     Chromora lets you color grade images and videos using smart AI, cinematic presets, and advanced tone matching — no editing skills needed.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link to="/color-grading">
                       <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 text-center">
                         <Upload className="w-4 h-4 mr-2" />
