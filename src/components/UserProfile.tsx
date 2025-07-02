@@ -41,14 +41,37 @@ export const UserProfile = () => {
       .from('user_profiles')
       .select('*')
       .eq('user_id', user.id)
-      .single();
+      .maybeSingle();
 
     if (error) {
       console.error('Error fetching profile:', error);
       return;
     }
 
-    setProfile(data);
+    if (!data) {
+      // Create profile if it doesn't exist
+      const { data: newProfile, error: createError } = await supabase
+        .from('user_profiles')
+        .insert({
+          user_id: user.id,
+          first_name: user.user_metadata?.first_name || null,
+          last_name: user.user_metadata?.last_name || null,
+          avatar_url: user.user_metadata?.avatar_url || null,
+          credits: 100,
+          plan: 'starter'
+        })
+        .select()
+        .single();
+
+      if (createError) {
+        console.error('Error creating profile:', createError);
+        return;
+      }
+
+      setProfile(newProfile);
+    } else {
+      setProfile(data);
+    }
   };
 
   const handleSignOut = async () => {
