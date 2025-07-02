@@ -8,8 +8,12 @@ import { Feature } from "@/components/ui/feature-with-image-comparison";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { BentoGrid, type BentoItem } from "@/components/ui/bento-grid";
+import { UserProfile } from "@/components/UserProfile";
+import { useAuthContext } from "@/components/auth/AuthProvider";
 
 const Index = () => {
+  const { user } = useAuthContext();
+  
   // Features data for Chromora's BentoGrid
   const chromoraFeatures: BentoItem[] = [
     {
@@ -108,11 +112,15 @@ const Index = () => {
               <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Resources</a>
               <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Support</a>
               <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Download</a>
-              <Link to="/login">
-                <Button className="bg-black text-white border border-white px-6 py-2 rounded-full hover:bg-gray-900 transition-colors">
-                  Sign in
-                </Button>
-              </Link>
+              {user ? (
+                <UserProfile />
+              ) : (
+                <Link to="/login">
+                  <Button className="bg-black text-white border border-white px-6 py-2 rounded-full hover:bg-gray-900 transition-colors">
+                    Sign in
+                  </Button>
+                </Link>
+              )}
             </div>
           </nav>
 
