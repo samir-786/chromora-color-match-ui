@@ -10,10 +10,6 @@ import Features from "./pages/Features";
 import Pricing from "./pages/Pricing";
 import Login from "./pages/Login";
 import SignIn from "./pages/SignIn";
-import Profile from "./pages/Profile";
-import Credits from "./pages/Credits";
-import Plans from "./pages/Plans";
-import Settings from "./pages/Settings";
 import ColorGrading from "./pages/ColorGrading";
 import NotFound from "./pages/NotFound";
 
@@ -32,10 +28,6 @@ const App = () => (
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signin" element={<SignIn />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/credits" element={<Credits />} />
-            <Route path="/plans" element={<Plans />} />
-            <Route path="/settings" element={<Settings />} />
             <Route path="/color-grading" element={<ColorGrading />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
