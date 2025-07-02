@@ -3,11 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Upload, Zap, Wand2, Palette, Clock, Users, Shield, Check } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Footer } from "@/components/ui/footer-section";
-import { Feature } from "@/components/ui/feature-with-image-comparison";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { BackgroundBeams } from "@/components/ui/background-beams";
+import Footer from "@/components/Footer";
 import { BentoGrid, type BentoItem } from "@/components/ui/bento-grid";
+import UserProfile from "@/components/UserProfile";
 
 const Index = () => {
   // Features data for Chromora's BentoGrid
@@ -71,14 +69,16 @@ const Index = () => {
       description: "Perfect for individual creators just getting started",
       features: ["Up to 50 video exports per month", "Basic AI color matching", "5 cinematic presets", "720p export quality", "Email support"],
       popular: false
-    }, {
+    },
+    {
       name: "Pro",
       price: "$29",
       period: "/month",
       description: "Ideal for professional content creators and small teams",
       features: ["Unlimited video exports", "Advanced AI color matching", "50+ cinematic presets", "4K export quality", "Batch processing", "Priority support", "Custom color profiles"],
       popular: true
-    }, {
+    },
+    {
       name: "Studio",
       price: "$99",
       period: "/month",
@@ -88,66 +88,105 @@ const Index = () => {
     }
   ];
 
-  return <div className="min-h-screen bg-black text-white">
-      {/* Hero Section with BackgroundBeams */}
-      <div className="relative min-h-screen overflow-hidden bg-black">
-        {/* BackgroundBeams Background only for hero */}
-        <BackgroundBeams className="absolute inset-0 z-0" />
+  return (
+    <div className="min-h-screen bg-black text-white">
+      {/* Hero Section */}
+      <div className="relative min-h-screen bg-black">
+        {/* Navigation */}
+        <nav className="flex justify-between items-center px-6 py-4">
+          <div className="flex items-center space-x-2">
+            <span className="text-xl font-bold text-white">Chromora</span>
+          </div>
+          
+          <div className="hidden md:flex items-center space-x-8">
+            <a href="#features" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Features</a>
+            <a href="#pricing" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Pricing</a>
+            <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Resources</a>
+            <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Support</a>
+            <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Download</a>
+            <UserProfile />
+          </div>
+        </nav>
 
-        {/* Content */}
-        <div className="relative z-10">
-          {/* Navigation */}
-          <nav className="flex justify-between items-center px-6 py-4 backdrop-blur-sm bg-black/20">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center">
-                <div className="w-4 h-4 bg-white rounded-full"></div>
-              </div>
-              <span className="text-xl font-bold text-white">Chromora</span>
-            </div>
-            
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Features</a>
-              <a href="#pricing" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Pricing</a>
-              <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Resources</a>
-              <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Support</a>
-              <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Download</a>
-              <Link to="/login">
-                <Button className="bg-black text-white border border-white px-6 py-2 rounded-full hover:bg-gray-900 transition-colors">
-                  Sign in
-                </Button>
-              </Link>
-            </div>
-          </nav>
-
-          {/* Hero Content */}
-          <div className="px-6 py-12">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
-                {/* Left Content */}
-                <div className="space-y-6">
-                  <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-center bg-gradient-to-r from-teal-400 via-white to-teal-300 bg-clip-text text-transparent">
-                    Turn Ordinary Footage Into Visual Masterpieces.
-                  </h1>
-                  <p className="text-gray-300 text-lg leading-relaxed text-center">
-                    Chromora lets you color grade images and videos using smart AI, cinematic presets, and advanced tone matching — no editing skills needed.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <Link to="/color-grading">
-                      <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 text-center">
-                        <Upload className="w-4 h-4 mr-2" />
-                        Get Started
-                      </Button>
-                    </Link>
-                    <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-all duration-300">
-                      <Zap className="w-4 h-4 mr-2" />
-                      Correct Color Now
+        {/* Hero Content */}
+        <div className="px-6 py-12">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
+              {/* Left Content */}
+              <div className="space-y-8">
+                <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
+                  <span className="bg-gradient-to-r from-teal-400 via-teal-300 to-teal-500 bg-clip-text text-transparent">
+                    Turn Ordinary Footage
+                  </span>
+                  <br />
+                  <span className="bg-gradient-to-r from-teal-400 via-teal-300 to-teal-500 bg-clip-text text-transparent">
+                    Into Visual
+                  </span>
+                  <br />
+                  <span className="bg-gradient-to-r from-teal-400 via-teal-300 to-teal-500 bg-clip-text text-transparent">
+                    Masterpieces.
+                  </span>
+                </h1>
+                <p className="text-gray-300 text-lg leading-relaxed max-w-lg">
+                  Chromora lets you color grade images and videos using smart AI, cinematic presets, and advanced tone matching — no editing skills needed.
+                </p>
+                <div className="flex gap-4">
+                  <Link to="/color-grading">
+                    <Button className="bg-transparent text-white border border-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition-colors flex items-center gap-2">
+                      <Upload className="w-4 h-4" />
+                      Get Started
                     </Button>
-                  </div>
+                  </Link>
+                  <Button className="bg-transparent text-white border border-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition-colors flex items-center gap-2">
+                    <Zap className="w-4 h-4" />
+                    Correct Color Now
+                  </Button>
                 </div>
+              </div>
 
-                {/* Right Interactive Image Comparison */}
+              {/* Right Image/Mockup */}
+              <div className="relative">
                 <div className="relative">
-                  <Feature beforeImage="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1920&h=1080&q=80" afterImage="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1920&h=1080&q=80" title="AI-Powered Color Transformation" description="Drag the slider to see the dramatic difference our AI color grading makes to your footage." badgeText="Interactive Demo" />
+                  <div className="bg-gradient-to-br from-purple-600 to-purple-800 rounded-3xl p-8 shadow-2xl">
+                    <div className="bg-white rounded-xl p-4 shadow-lg">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">Before</span>
+                        <div className="flex gap-2">
+                          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                        </div>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="bg-gray-100 rounded-lg p-4">
+                          <div className="text-black text-sm mb-2">Dashboard Overview</div>
+                          <div className="grid grid-cols-3 gap-4">
+                            <div className="bg-teal-100 p-3 rounded">
+                              <div className="text-teal-800 font-bold text-lg">479K</div>
+                              <div className="text-teal-600 text-xs">Revenue</div>
+                            </div>
+                            <div className="bg-blue-100 p-3 rounded">
+                              <div className="text-blue-800 font-bold text-lg">17min</div>
+                              <div className="text-blue-600 text-xs">Avg Session</div>
+                            </div>
+                            <div className="bg-green-100 p-3 rounded">
+                              <div className="text-green-800 font-bold text-lg">2prs</div>
+                              <div className="text-green-600 text-xs">Conversion</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="bg-gray-50 rounded-lg p-4">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="text-black text-sm">Performance</span>
+                            <span className="text-gray-500 text-xs">Last 30 days</span>
+                          </div>
+                          <div className="h-16 bg-gradient-to-r from-teal-200 to-blue-200 rounded relative overflow-hidden">
+                            <div className="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-r from-teal-400 to-blue-400 rounded-b"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -155,9 +194,9 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Features Section with BentoGrid - Fully Black Background */}
-      <div id="features" className="bg-black dark">
-        <div className="text-center pt-16 pb-8 px-6">
+      {/* Features Section */}
+      <div id="features" className="bg-black py-16">
+        <div className="text-center mb-12 px-6">
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
             Explore Chromora's Features
           </h2>
@@ -165,12 +204,12 @@ const Index = () => {
             Discover how our advanced AI-powered color grading tools can transform your creative workflow with professional-grade features.
           </p>
         </div>
-        <div className="pb-16">
+        <div className="pb-8">
           <BentoGrid items={chromoraFeatures} />
         </div>
       </div>
 
-      {/* Pricing Section - Fully Black Background */}
+      {/* Pricing Section */}
       <div id="pricing" className="px-6 py-16 bg-black">
         <div className="max-w-6xl mx-auto">
           <div className="text-center space-y-6 mb-16">
@@ -183,13 +222,15 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {plans.map((plan, index) => <Card key={index} className={`relative border-gray-700 bg-gray-900/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 ${plan.popular ? 'ring-2 ring-teal-500 scale-105' : ''}`}>
-                <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} className={plan.popular ? 'opacity-100' : 'opacity-0 hover:opacity-100'} />
-                {plan.popular && <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+            {plans.map((plan, index) => (
+              <Card key={index} className={`relative border-gray-700 bg-gray-900/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 ${plan.popular ? 'ring-2 ring-teal-500 scale-105' : ''}`}>
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-gradient-to-r from-teal-400 to-teal-600 text-white px-4 py-1 rounded-full text-sm font-medium">
                       Most Popular
                     </span>
-                  </div>}
+                  </div>
+                )}
                 <CardHeader className="text-center pb-4">
                   <CardTitle className="text-2xl font-bold text-white">{plan.name}</CardTitle>
                   <div className="flex items-baseline justify-center">
@@ -202,21 +243,24 @@ const Index = () => {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <ul className="space-y-3">
-                    {plan.features.map((feature, featureIndex) => <li key={featureIndex} className="flex items-center">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center">
                         <Check className="w-5 h-5 text-teal-400 mr-3 flex-shrink-0" />
                         <span className="text-gray-300">{feature}</span>
-                      </li>)}
+                      </li>
+                    ))}
                   </ul>
-                  <Button className="w-full py-3 rounded-full bg-black text-white border border-white hover:bg-gray-900 transition-colors">
+                  <Button className="w-full py-3 rounded-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors">
                     Get Started
                   </Button>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* CTA Section - Fully Black Background */}
+      {/* CTA Section */}
       <div className="px-6 py-16 bg-black text-white">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h2 className="text-4xl font-bold">Ready to Transform Your Footage?</h2>
@@ -224,7 +268,7 @@ const Index = () => {
             Join thousands of creators who are already using Chromora to create stunning visuals.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-colors">
+            <Button className="bg-transparent text-white border border-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition-colors">
               Start Free Trial
             </Button>
           </div>
@@ -232,7 +276,8 @@ const Index = () => {
       </div>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
 
 export default Index;
