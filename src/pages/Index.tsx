@@ -98,11 +98,8 @@ const Index = () => {
         <div className="relative z-10">
           {/* Navigation */}
           <nav className="flex justify-between items-center px-6 py-4 backdrop-blur-sm bg-black/20">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center">
-                <div className="w-4 h-4 bg-white rounded-full"></div>
-              </div>
-              <span className="text-xl font-bold text-white">Chromora</span>
+            <div className="flex items-center">
+              <span className="text-2xl font-bold text-white">Chromora</span>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">

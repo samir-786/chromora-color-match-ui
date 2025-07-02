@@ -60,11 +60,8 @@ const Pricing = () => {
     <div className="min-h-screen bg-gradient-to-b from-[#ffe5e5] to-white">
       {/* Navigation */}
       <nav className="flex justify-between items-center px-6 py-4">
-        <Link to="/" className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
-            <div className="w-4 h-4 bg-white rounded-full"></div>
-          </div>
-          <span className="text-xl font-bold text-black">Chromora</span>
+        <Link to="/" className="text-2xl font-bold text-black hover:text-gray-700 transition-colors">
+          Chromora
         </Link>
         
         <div className="hidden md:flex items-center space-x-8">

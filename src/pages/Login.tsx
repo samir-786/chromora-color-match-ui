@@ -1,19 +1,56 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthContext } from "@/components/auth/AuthProvider";
+import { useToast } from "@/hooks/use-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { signIn, user } = useAuthContext();
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login attempt:", { email, password });
-    // Handle login logic here
+    setLoading(true);
+
+    try {
+      const { error } = await signIn(email, password);
+      
+      if (error) {
+        toast({
+          title: "Login failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Welcome back!",
+          description: "Successfully signed in to Chromora",
+        });
+        navigate('/');
+      }
+    } catch (error) {
+      toast({
+        title: "Login failed",
+        description: "An unexpected error occurred",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -21,11 +58,8 @@ const Login = () => {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link to="/" className="flex items-center justify-center space-x-2">
-            <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
-              <div className="w-5 h-5 bg-white rounded-full"></div>
-            </div>
-            <span className="text-2xl font-bold text-black">Chromora</span>
+          <Link to="/" className="text-3xl font-bold text-black hover:text-gray-700 transition-colors">
+            Chromora
           </Link>
         </div>
 
@@ -72,8 +106,8 @@ const Login = () => {
                 </a>
               </div>
 
-              <Button type="submit" className="w-full h-12 bg-black text-white rounded-full hover:bg-gray-800 transition-colors">
-                Sign In
+              <Button type="submit" disabled={loading} className="w-full h-12 bg-black text-white rounded-full hover:bg-gray-800 transition-colors">
+                {loading ? "Signing in..." : "Sign In"}
               </Button>
             </form>
 
