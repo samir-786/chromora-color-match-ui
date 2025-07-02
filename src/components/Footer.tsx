@@ -9,8 +9,11 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div>
-              <span className="text-2xl font-bold">Chromora</span>
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                <div className="w-4 h-4 bg-black rounded-full"></div>
+              </div>
+              <span className="text-xl font-bold">Chromora</span>
             </div>
             <p className="text-gray-400">
               Transform your footage into visual masterpieces with AI-powered color grading.

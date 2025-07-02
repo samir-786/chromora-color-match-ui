@@ -98,8 +98,11 @@ const Index = () => {
         <div className="relative z-10">
           {/* Navigation */}
           <nav className="flex justify-between items-center px-6 py-4 backdrop-blur-sm bg-black/20">
-            <div className="flex items-center">
-              <span className="text-2xl font-bold text-white">Chromora</span>
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center">
+                <div className="w-4 h-4 bg-white rounded-full"></div>
+              </div>
+              <span className="text-xl font-bold text-white">Chromora</span>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
@@ -128,7 +131,7 @@ const Index = () => {
                   <p className="text-gray-300 text-lg leading-relaxed text-center">
                     Chromora lets you color grade images and videos using smart AI, cinematic presets, and advanced tone matching — no editing skills needed.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <div className="flex flex-col sm:flex-row gap-4">
                     <Link to="/color-grading">
                       <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 text-center">
                         <Upload className="w-4 h-4 mr-2" />

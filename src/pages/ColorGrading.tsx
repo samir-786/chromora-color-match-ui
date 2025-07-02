@@ -140,7 +140,12 @@ const ColorGrading = () => {
     <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
       <nav className="flex justify-between items-center px-6 py-4 border-b neon-border">
-        <div className="flex items-center">
+        <div className="flex items-center space-x-3">
+          <div className="relative">
+            <div className="w-10 h-10 bg-gradient-to-br from-[hsl(var(--neon-teal))] to-[hsl(var(--neon-purple))] rounded-full flex items-center justify-center neon-glow">
+              <Palette className="w-5 h-5 text-black" />
+            </div>
+          </div>
           <div>
             <h1 className="text-2xl font-bold gradient-text">Chromora</h1>
             <p className="text-xs text-muted-foreground">AI Color Grading Studio</p>
