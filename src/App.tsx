@@ -9,6 +9,7 @@ import Features from "./pages/Features";
 import Pricing from "./pages/Pricing";
 import Login from "./pages/Login";
 import SignIn from "./pages/SignIn";
+import ColorGrading from "./pages/ColorGrading";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/color-grading" element={<ColorGrading />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

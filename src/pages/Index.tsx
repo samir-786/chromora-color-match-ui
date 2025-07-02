@@ -132,10 +132,12 @@ const Index = () => {
                     Chromora lets you color grade images and videos using smart AI, cinematic presets, and advanced tone matching — no editing skills needed.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 text-center">
-                      <Upload className="w-4 h-4 mr-2" />
-                      Upload Image
-                    </Button>
+                    <Link to="/color-grading">
+                      <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 text-center">
+                        <Upload className="w-4 h-4 mr-2" />
+                        Get Started
+                      </Button>
+                    </Link>
                     <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-all duration-300">
                       <Zap className="w-4 h-4 mr-2" />
                       Correct Color Now
