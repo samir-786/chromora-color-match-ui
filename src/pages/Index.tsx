@@ -98,10 +98,7 @@ const Index = () => {
         <div className="relative z-10">
           {/* Navigation */}
           <nav className="flex justify-between items-center px-6 py-4 backdrop-blur-sm bg-black/20">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center">
-                <div className="w-4 h-4 bg-white rounded-full"></div>
-              </div>
+            <div className="flex items-center">
               <span className="text-xl font-bold text-white">Chromora</span>
             </div>
             
@@ -132,14 +129,14 @@ const Index = () => {
                   <p className="text-white text-lg leading-relaxed text-center font-medium drop-shadow-md">
                     Chromora lets you color grade images and videos using smart AI, cinematic presets, and advanced tone matching — no editing skills needed.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link to="/mvp">
-                      <Button className="bg-teal-600 text-white px-8 py-3 rounded-full hover:bg-teal-700 transition-all duration-300 transform hover:scale-105 text-center w-full">
+                      <Button className="bg-teal-600 text-white px-8 py-3 rounded-full hover:bg-teal-700 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto">
                         <Wand2 className="w-4 h-4 mr-2" />
                         Get Started
                       </Button>
                     </Link>
-                    <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-all duration-300">
+                    <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-all duration-300 w-full sm:w-auto">
                       <Zap className="w-4 h-4 mr-2" />
                       Try Demo
                     </Button>
