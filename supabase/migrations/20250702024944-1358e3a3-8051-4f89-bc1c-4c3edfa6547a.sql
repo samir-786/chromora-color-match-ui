@@ -1,1 +1,0 @@
--- Create edge function for image enhancement with Gemini AI
