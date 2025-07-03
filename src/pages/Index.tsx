@@ -125,20 +125,23 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Left Content */}
                 <div className="space-y-6">
-                  <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-center bg-gradient-to-r from-teal-400 via-white to-teal-300 bg-clip-text text-transparent">
-                    Turn Ordinary Footage Into Visual Masterpieces.
+                  <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-center text-white drop-shadow-lg">
+                    Turn Ordinary Footage Into 
+                    <span className="bg-gradient-to-r from-teal-400 to-teal-300 bg-clip-text text-transparent"> Visual Masterpieces</span>
                   </h1>
-                  <p className="text-gray-300 text-lg leading-relaxed text-center">
+                  <p className="text-white text-lg leading-relaxed text-center font-medium drop-shadow-md">
                     Chromora lets you color grade images and videos using smart AI, cinematic presets, and advanced tone matching — no editing skills needed.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 text-center">
-                      <Upload className="w-4 h-4 mr-2" />
-                      Upload Image
-                    </Button>
+                    <Link to="/mvp">
+                      <Button className="bg-teal-600 text-white px-8 py-3 rounded-full hover:bg-teal-700 transition-all duration-300 transform hover:scale-105 text-center w-full">
+                        <Wand2 className="w-4 h-4 mr-2" />
+                        Get Started
+                      </Button>
+                    </Link>
                     <Button className="bg-black text-white border border-white px-8 py-3 rounded-full hover:bg-gray-900 transition-all duration-300">
                       <Zap className="w-4 h-4 mr-2" />
-                      Correct Color Now
+                      Try Demo
                     </Button>
                   </div>
                 </div>
