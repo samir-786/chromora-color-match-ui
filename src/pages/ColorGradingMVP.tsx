@@ -55,10 +55,10 @@ const ColorGradingMVP = () => {
       formData.append('image', blob);
       formData.append('preset', selectedPreset);
 
-      const enhanceResponse = await fetch('/functions/v1/enhance-image', {
+      const enhanceResponse = await fetch('https://twejmhqbibellgduyxvs.supabase.co/functions/v1/enhance-image', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR3ZWptaHFiaWJlbGxnZHV5eHZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjgyNDIsImV4cCI6MjA2Njc0NDI0Mn0.5ApOrRmXeox-zU5hulgfRW_CHypUU7W74_nnV6nggnk'}`,
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR3ZWptaHFiaWJlbGxnZHV5eHZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjgyNDIsImV4cCI6MjA2Njc0NDI0Mn0.5ApOrRmXeox-zU5hulgfRW_CHypUU7W74_nnV6nggnk`,
         },
         body: formData
       });

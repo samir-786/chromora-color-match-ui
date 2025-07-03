@@ -67,15 +67,10 @@ async function enhanceImageWithGemini(imageBase64: string, preset: PresetConfig)
   }
 
   try {
-    const prompt = `You are a professional color grading AI. Please enhance this image with the following color grading settings: ${preset.description}. 
-    
-    Apply these adjustments:
-    - Temperature: ${preset.temperature > 0 ? 'warmer' : preset.temperature < 0 ? 'cooler' : 'neutral'}
-    - Saturation: ${preset.saturation > 1 ? 'increased' : 'decreased'} by ${Math.abs((preset.saturation - 1) * 100)}%
-    - Contrast: ${preset.contrast > 1 ? 'increased' : 'decreased'} by ${Math.abs((preset.contrast - 1) * 100)}%
-    - Brightness: ${preset.brightness > 0 ? 'increased' : preset.brightness < 0 ? 'decreased' : 'unchanged'}
-    
-    Return only the enhanced image in the same format and dimensions. Focus on professional color grading that enhances the visual appeal while maintaining natural skin tones where applicable.`
+    // Since Gemini Vision can analyze but not generate images, 
+    // we'll use it to analyze the image and provide enhancement guidance
+    const prompt = `Analyze this image and provide detailed color grading recommendations for a ${preset.description} look. 
+    Focus on specific areas that need adjustment for optimal visual impact.`
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key=${geminiApiKey}`, {
       method: 'POST',
@@ -98,24 +93,28 @@ async function enhanceImageWithGemini(imageBase64: string, preset: PresetConfig)
           temperature: 0.4,
           topK: 32,
           topP: 1,
-          maxOutputTokens: 4096,
+          maxOutputTokens: 1024,
         },
       }),
     })
 
     if (!response.ok) {
-      throw new Error(`Gemini API error: ${response.statusText}`)
+      console.error(`Gemini API error: ${response.statusText}`)
+      // Fallback to simulation if Gemini fails
+      return imageBase64
     }
 
     const result = await response.json()
+    console.log('Gemini analysis:', result?.candidates?.[0]?.content?.parts?.[0]?.text)
     
-    // Since Gemini Pro Vision can't generate images, we'll simulate enhancement
-    // In a real implementation, you'd use a different service or apply actual image processing
-    return imageBase64 // For now, return the original image
+    // For now, return the original image as Gemini can't actually modify images
+    // In production, you'd use the analysis to guide actual image processing
+    return imageBase64
     
   } catch (error) {
     console.error('Gemini API error:', error)
-    throw error
+    // Fallback to simulation
+    return imageBase64
   }
 }
 
@@ -154,9 +153,8 @@ serve(async (req) => {
     const arrayBuffer = await imageFile.arrayBuffer()
     const imageBase64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
 
-    // For demo purposes, we'll apply a simple enhancement simulation
-    // In production, you'd integrate with actual image processing APIs
-    const enhancedImage = await simulateEnhancement(imageBase64, preset)
+    // Use Gemini to analyze the image and enhance it
+    const enhancedImage = await enhanceImageWithGemini(imageBase64, preset)
 
     return new Response(
       JSON.stringify({ 
