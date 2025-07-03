@@ -5,7 +5,7 @@ import { Upload, Zap, Wand2, Palette, Clock, Users, Shield, Check } from "lucide
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 import { BentoGrid, type BentoItem } from "@/components/ui/bento-grid";
-
+import UserProfile from "@/components/UserProfile";
 
 const Index = () => {
   // Features data for Chromora's BentoGrid
@@ -104,7 +104,7 @@ const Index = () => {
             <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Resources</a>
             <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Support</a>
             <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Download</a>
-            
+            <UserProfile />
           </div>
         </nav>
 
