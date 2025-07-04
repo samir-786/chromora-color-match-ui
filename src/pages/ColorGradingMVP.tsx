@@ -107,31 +107,33 @@ const ColorGradingMVP = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
-      <nav className="flex justify-between items-center px-6 py-4 backdrop-blur-sm bg-black/20 border-b border-gray-800">
-        <Link to="/" className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center">
-            <div className="w-4 h-4 bg-white rounded-full"></div>
-          </div>
+      <nav className="flex justify-between items-center px-6 py-4 backdrop-blur-sm bg-black/50 border-b border-gray-800">
+        <Link to="/" className="flex items-center">
           <span className="text-xl font-bold text-white">Chromora</span>
         </Link>
         
         <div className="flex items-center space-x-4">
           <Link to="/">
             <Button variant="ghost" className="text-gray-300 hover:text-white">
-              Back to Home
+              ← Back to Home
             </Button>
           </Link>
         </div>
       </nav>
 
-      <div className="container mx-auto px-6 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-teal-400 to-white bg-clip-text text-transparent">
+      <div className="container mx-auto px-6 py-12 max-w-7xl">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-teal-400 via-teal-300 to-white bg-clip-text text-transparent">
             AI Color Grading Studio
           </h1>
-          <p className="text-gray-300 text-lg">
-            Transform your images with professional-grade AI color enhancement
+          <p className="text-gray-300 text-xl max-w-3xl mx-auto leading-relaxed">
+            Transform your images with professional-grade AI color enhancement. Upload, select a preset, and watch your photos come to life.
           </p>
+          <div className="mt-6 flex justify-center">
+            <div className="bg-teal-500/20 border border-teal-500/30 rounded-full px-4 py-2">
+              <span className="text-teal-300 text-sm font-medium">✨ Powered by Google Gemini AI</span>
+            </div>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
