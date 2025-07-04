@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Upload, Download, Wand2, RotateCcw, Palette } from "lucide-react";
+import { Upload, Download, Wand2, RotateCcw, Palette, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
@@ -9,17 +9,13 @@ const ColorGradingMVP = () => {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
   const [enhancedImage, setEnhancedImage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [selectedPreset, setSelectedPreset] = useState<string>("");
+  const [selectedTool, setSelectedTool] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
-  const colorPresets = [
-    { id: "cinematic", name: "Cinematic", description: "Warm, movie-like tones" },
-    { id: "vibrant", name: "Vibrant", description: "Enhanced colors and saturation" },
-    { id: "vintage", name: "Vintage", description: "Retro film aesthetic" },
-    { id: "cool", name: "Cool Tones", description: "Blue and teal emphasis" },
-    { id: "warm", name: "Warm Tones", description: "Orange and yellow emphasis" },
-    { id: "dramatic", name: "Dramatic", description: "High contrast and moody" }
+  const tools = [
+    { id: "color-grading", name: "Color Grading", description: "Professional color enhancement", icon: Palette },
+    { id: "quality-enhancer", name: "Quality Enhancer", description: "AI-powered image upscaling", icon: Zap }
   ];
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,10 +31,10 @@ const ColorGradingMVP = () => {
   };
 
   const enhanceImage = async () => {
-    if (!originalImage || !selectedPreset) {
+    if (!originalImage || !selectedTool) {
       toast({
         title: "Missing Requirements",
-        description: "Please upload an image and select a preset",
+        description: "Please upload an image and select a tool",
         variant: "destructive"
       });
       return;
@@ -53,7 +49,7 @@ const ColorGradingMVP = () => {
       
       const formData = new FormData();
       formData.append('image', blob);
-      formData.append('preset', selectedPreset);
+      formData.append('preset', selectedTool);
 
       const enhanceResponse = await fetch('https://twejmhqbibellgduyxvs.supabase.co/functions/v1/enhance-image', {
         method: 'POST',
@@ -98,7 +94,7 @@ const ColorGradingMVP = () => {
   const resetImage = () => {
     setOriginalImage(null);
     setEnhancedImage(null);
-    setSelectedPreset("");
+    setSelectedTool("");
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -107,7 +103,7 @@ const ColorGradingMVP = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
-      <nav className="flex justify-between items-center px-6 py-4 backdrop-blur-sm bg-black/50 border-b border-gray-800">
+      <nav className="flex justify-between items-center px-6 py-4 backdrop-blur-sm bg-black border-b border-gray-900">
         <Link to="/" className="flex items-center">
           <span className="text-xl font-bold text-white">Chromora</span>
         </Link>
@@ -121,46 +117,71 @@ const ColorGradingMVP = () => {
         </div>
       </nav>
 
-      <div className="container mx-auto px-6 py-12 max-w-7xl">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-teal-400 via-teal-300 to-white bg-clip-text text-transparent">
-            AI Color Grading Studio
+      <div className="container mx-auto px-6 py-16 max-w-7xl">
+        <div className="text-center mb-16">
+          <h1 className="text-6xl font-bold mb-8 text-white">
+            AI Enhancement Studio
           </h1>
-          <p className="text-gray-300 text-xl max-w-3xl mx-auto leading-relaxed">
-            Transform your images with professional-grade AI color enhancement. Upload, select a preset, and watch your photos come to life.
+          <p className="text-gray-400 text-2xl max-w-4xl mx-auto leading-relaxed mb-8">
+            Professional AI-powered image enhancement tools. Upload your image and select the perfect enhancement.
           </p>
-          <div className="mt-6 flex justify-center">
-            <div className="bg-teal-500/20 border border-teal-500/30 rounded-full px-4 py-2">
-              <span className="text-teal-300 text-sm font-medium">✨ Powered by Google Gemini AI</span>
+          <div className="flex justify-center">
+            <div className="bg-gray-900 border border-gray-800 rounded-full px-6 py-3">
+              <span className="text-gray-300 text-sm font-medium">◉ Powered by Google Gemini AI</span>
             </div>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-8">
+        {/* Tools Selection */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-white text-center mb-8">Select Enhancement Tool</h2>
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {tools.map((tool) => {
+              const IconComponent = tool.icon;
+              return (
+                <div
+                  key={tool.id}
+                  className={`p-8 rounded-xl border cursor-pointer transition-all duration-300 ${
+                    selectedTool === tool.id
+                      ? 'border-white bg-gray-900'
+                      : 'border-gray-800 hover:border-gray-700 bg-gray-950'
+                  }`}
+                  onClick={() => setSelectedTool(tool.id)}
+                >
+                  <IconComponent className="w-12 h-12 text-white mb-4 mx-auto" />
+                  <h3 className="text-white font-bold text-xl mb-2 text-center">{tool.name}</h3>
+                  <p className="text-gray-400 text-center">{tool.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8 mb-12">
           {/* Upload Section */}
-          <Card className="bg-gray-900/50 border-gray-700">
+          <Card className="bg-gray-950 border-gray-800">
             <CardHeader>
-              <CardTitle className="text-white flex items-center">
-                <Upload className="w-5 h-5 mr-2 text-teal-400" />
+              <CardTitle className="text-white flex items-center justify-center">
+                <Upload className="w-6 h-6 mr-3 text-white" />
                 Upload Image
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div 
-                className="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center cursor-pointer hover:border-teal-400 transition-colors"
+                className="border-2 border-dashed border-gray-800 rounded-xl p-12 text-center cursor-pointer hover:border-gray-700 transition-all duration-300 bg-black"
                 onClick={() => fileInputRef.current?.click()}
               >
                 {originalImage ? (
                   <img 
                     src={originalImage} 
                     alt="Original" 
-                    className="max-h-64 mx-auto rounded-lg object-contain"
+                    className="max-h-80 w-full mx-auto rounded-lg object-contain"
                   />
                 ) : (
                   <div>
-                    <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-                    <p className="text-gray-300 mb-2">Click to upload an image</p>
-                    <p className="text-sm text-gray-500">PNG, JPG up to 10MB</p>
+                    <Upload className="w-16 h-16 mx-auto mb-6 text-gray-500" />
+                    <p className="text-white text-lg mb-2">Drop your image here or click to upload</p>
+                    <p className="text-sm text-gray-500">PNG, JPG, WEBP up to 10MB</p>
                   </div>
                 )}
               </div>
@@ -175,25 +196,27 @@ const ColorGradingMVP = () => {
           </Card>
 
           {/* Enhanced Image */}
-          <Card className="bg-gray-900/50 border-gray-700">
+          <Card className="bg-gray-950 border-gray-800">
             <CardHeader>
-              <CardTitle className="text-white flex items-center">
-                <Wand2 className="w-5 h-5 mr-2 text-teal-400" />
+              <CardTitle className="text-white flex items-center justify-center">
+                <Wand2 className="w-6 h-6 mr-3 text-white" />
                 Enhanced Result
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="border-2 border-gray-600 rounded-lg p-8 text-center min-h-64 flex items-center justify-center">
+              <div className="border-2 border-gray-800 rounded-xl p-12 text-center min-h-80 flex items-center justify-center bg-black">
                 {enhancedImage ? (
                   <img 
                     src={enhancedImage} 
                     alt="Enhanced" 
-                    className="max-h-64 rounded-lg object-contain"
+                    className="max-h-80 w-full rounded-lg object-contain"
                   />
                 ) : (
-                  <div className="text-gray-400">
-                    <Palette className="w-12 h-12 mx-auto mb-4" />
-                    <p>Enhanced image will appear here</p>
+                  <div className="text-gray-500">
+                    <div className="w-16 h-16 mx-auto mb-6 border-2 border-gray-700 rounded-lg flex items-center justify-center">
+                      <Wand2 className="w-8 h-8" />
+                    </div>
+                    <p className="text-lg">Enhanced image will appear here</p>
                   </div>
                 )}
               </div>
@@ -201,46 +224,21 @@ const ColorGradingMVP = () => {
           </Card>
         </div>
 
-        {/* Presets */}
-        <Card className="bg-gray-900/50 border-gray-700 mb-8">
-          <CardHeader>
-            <CardTitle className="text-white">Color Grading Presets</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {colorPresets.map((preset) => (
-                <div
-                  key={preset.id}
-                  className={`p-4 rounded-lg border cursor-pointer transition-all ${
-                    selectedPreset === preset.id
-                      ? 'border-teal-400 bg-teal-400/10'
-                      : 'border-gray-600 hover:border-gray-500'
-                  }`}
-                  onClick={() => setSelectedPreset(preset.id)}
-                >
-                  <h3 className="text-white font-medium mb-1">{preset.name}</h3>
-                  <p className="text-sm text-gray-400">{preset.description}</p>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-6 justify-center">
           <Button
             onClick={enhanceImage}
-            disabled={!originalImage || !selectedPreset || isProcessing}
-            className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-full transition-colors"
+            disabled={!originalImage || !selectedTool || isProcessing}
+            className="bg-white text-black hover:bg-gray-200 px-12 py-4 rounded-xl text-lg font-medium transition-all duration-300 disabled:bg-gray-800 disabled:text-gray-500"
           >
             {isProcessing ? (
               <>
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black mr-3"></div>
                 Processing...
               </>
             ) : (
               <>
-                <Wand2 className="w-4 h-4 mr-2" />
+                <Wand2 className="w-5 h-5 mr-3" />
                 Enhance Image
               </>
             )}
@@ -250,9 +248,9 @@ const ColorGradingMVP = () => {
             <Button
               onClick={downloadImage}
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-black px-8 py-3 rounded-full"
+              className="border-gray-600 bg-black text-gray-300 hover:bg-gray-900 hover:text-white px-12 py-4 rounded-xl text-lg font-medium transition-all duration-300"
             >
-              <Download className="w-4 h-4 mr-2" />
+              <Download className="w-5 h-5 mr-3" />
               Download
             </Button>
           )}
@@ -261,9 +259,9 @@ const ColorGradingMVP = () => {
             <Button
               onClick={resetImage}
               variant="ghost"
-              className="text-gray-300 hover:text-white px-8 py-3 rounded-full"
+              className="text-gray-400 hover:text-white hover:bg-gray-900 px-12 py-4 rounded-xl text-lg font-medium transition-all duration-300"
             >
-              <RotateCcw className="w-4 h-4 mr-2" />
+              <RotateCcw className="w-5 h-5 mr-3" />
               Reset
             </Button>
           )}
