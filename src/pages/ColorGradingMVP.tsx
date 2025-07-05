@@ -127,7 +127,7 @@ const ColorGradingMVP = () => {
           </p>
           <div className="flex justify-center">
             <div className="bg-gray-900 border border-gray-800 rounded-full px-6 py-3">
-              <span className="text-gray-300 text-sm font-medium">◉ Powered by Google Gemini AI</span>
+              <span className="text-gray-300 text-sm font-medium">◉ Powered by Deep AI</span>
             </div>
           </div>
         </div>

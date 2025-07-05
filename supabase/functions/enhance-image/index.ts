@@ -15,106 +15,75 @@ interface PresetConfig {
 }
 
 const presets: Record<string, PresetConfig> = {
-  cinematic: {
+  "color-grading": {
     temperature: 0.2,
     saturation: 1.3,
     contrast: 1.2,
     brightness: 0.1,
-    description: "warm, movie-like tones with enhanced contrast"
+    description: "professional color enhancement"
   },
-  vibrant: {
+  "quality-enhancer": {
     temperature: 0,
-    saturation: 1.6,
-    contrast: 1.1,
-    brightness: 0.05,
-    description: "highly saturated colors with vivid appearance"
-  },
-  vintage: {
-    temperature: 0.3,
-    saturation: 0.8,
-    contrast: 0.9,
-    brightness: -0.1,
-    description: "retro film aesthetic with muted colors and warm tones"
-  },
-  cool: {
-    temperature: -0.3,
     saturation: 1.1,
     contrast: 1.1,
-    brightness: 0,
-    description: "cool blue and teal tones with modern feel"
-  },
-  warm: {
-    temperature: 0.4,
-    saturation: 1.2,
-    contrast: 1.0,
-    brightness: 0.1,
-    description: "warm orange and yellow tones for cozy feeling"
-  },
-  dramatic: {
-    temperature: 0,
-    saturation: 1.4,
-    contrast: 1.5,
-    brightness: -0.05,
-    description: "high contrast and moody atmosphere"
+    brightness: 0.05,
+    description: "AI-powered image upscaling and quality enhancer"
   }
 }
 
-async function enhanceImageWithGemini(imageBase64: string, preset: PresetConfig): Promise<string> {
-  const geminiApiKey = Deno.env.get('GEMINI_API_KEY')
+async function enhanceImageWithDeepAI(imageBase64: string, preset: PresetConfig): Promise<string> {
+  const deepAIApiKey = Deno.env.get('DEEP_AI_API_KEY')
   
-  if (!geminiApiKey) {
-    throw new Error('Gemini API key not configured')
+  if (!deepAIApiKey) {
+    throw new Error('Deep AI API key not configured')
   }
 
   try {
-    // Since Gemini Vision can analyze but not generate images, 
-    // we'll use it to analyze the image and provide enhancement guidance
-    const prompt = `Analyze this image and provide detailed color grading recommendations for a ${preset.description} look. 
-    Focus on specific areas that need adjustment for optimal visual impact.`
+    // Convert base64 to blob for Deep AI API
+    const imageBuffer = Uint8Array.from(atob(imageBase64), c => c.charCodeAt(0))
+    
+    const formData = new FormData()
+    formData.append('image', new Blob([imageBuffer], { type: 'image/jpeg' }))
+    
+    // Use Deep AI's colorizer or enhancer based on preset
+    let apiEndpoint = 'https://api.deepai.org/api/colorizer'
+    
+    // Map presets to Deep AI endpoints
+    if (preset.description.includes('quality') || preset.description.includes('enhancer')) {
+      apiEndpoint = 'https://api.deepai.org/api/waifu2x'
+    } else {
+      apiEndpoint = 'https://api.deepai.org/api/colorizer'
+    }
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key=${geminiApiKey}`, {
+    const response = await fetch(apiEndpoint, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Api-Key': deepAIApiKey,
       },
-      body: JSON.stringify({
-        contents: [{
-          parts: [
-            { text: prompt },
-            {
-              inline_data: {
-                mime_type: "image/jpeg",
-                data: imageBase64
-              }
-            }
-          ]
-        }],
-        generationConfig: {
-          temperature: 0.4,
-          topK: 32,
-          topP: 1,
-          maxOutputTokens: 1024,
-        },
-      }),
+      body: formData
     })
 
     if (!response.ok) {
-      console.error(`Gemini API error: ${response.statusText}`)
-      // Fallback to simulation if Gemini fails
-      return imageBase64
+      console.error(`Deep AI API error: ${response.statusText}`)
+      throw new Error('Deep AI API request failed')
     }
 
     const result = await response.json()
-    console.log('Gemini analysis:', result?.candidates?.[0]?.content?.parts?.[0]?.text)
+    console.log('Deep AI response:', result)
     
-    // For now, return the original image as Gemini can't actually modify images
-    // In production, you'd use the analysis to guide actual image processing
-    return imageBase64
+    // Download the enhanced image and convert to base64
+    if (result.output_url) {
+      const imageResponse = await fetch(result.output_url)
+      const imageArrayBuffer = await imageResponse.arrayBuffer()
+      const enhancedBase64 = btoa(String.fromCharCode(...new Uint8Array(imageArrayBuffer)))
+      return enhancedBase64
+    }
+    
+    throw new Error('No output URL from Deep AI')
     
   } catch (error) {
-    console.error('Gemini API error:', error)
-    // Fallback to simulation
-    return imageBase64
+    console.error('Deep AI API error:', error)
+    throw error
   }
 }
 
@@ -153,8 +122,8 @@ serve(async (req) => {
     const arrayBuffer = await imageFile.arrayBuffer()
     const imageBase64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
 
-    // Use Gemini to analyze the image and enhance it
-    const enhancedImage = await enhanceImageWithGemini(imageBase64, preset)
+    // Use Deep AI to enhance the image
+    const enhancedImage = await enhanceImageWithDeepAI(imageBase64, preset)
 
     return new Response(
       JSON.stringify({ 
