@@ -98,11 +98,30 @@ serve(async (req) => {
   }
 
   try {
+    console.log('Starting image enhancement request...')
+    
+    // Check if Deep AI API key is configured
+    const deepAIApiKey = Deno.env.get('DEEP_AI_API_KEY')
+    if (!deepAIApiKey) {
+      console.error('Deep AI API key not found in environment variables')
+      return new Response(
+        JSON.stringify({ error: 'Deep AI API key not configured' }),
+        { 
+          status: 500, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      )
+    }
+    
     const formData = await req.formData()
     const imageFile = formData.get('image') as File
     const presetId = formData.get('preset') as string
 
+    console.log(`Received request with preset: ${presetId}`)
+    console.log(`Image file size: ${imageFile?.size} bytes`)
+
     if (!imageFile || !presetId) {
+      console.error('Missing image or preset in request')
       return new Response(
         JSON.stringify({ error: 'Missing image or preset' }),
         { 
@@ -114,6 +133,7 @@ serve(async (req) => {
 
     const preset = presets[presetId]
     if (!preset) {
+      console.error(`Invalid preset: ${presetId}`)
       return new Response(
         JSON.stringify({ error: 'Invalid preset' }),
         { 
@@ -123,12 +143,16 @@ serve(async (req) => {
       )
     }
 
+    console.log('Converting image to base64...')
     // Convert image to base64
     const arrayBuffer = await imageFile.arrayBuffer()
     const imageBase64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
+    console.log(`Image converted to base64, length: ${imageBase64.length}`)
 
     // Use Deep AI to enhance the image
+    console.log('Calling Deep AI API...')
     const enhancedImage = await enhanceImageWithDeepAI(imageBase64, preset)
+    console.log('Deep AI processing completed successfully')
 
     return new Response(
       JSON.stringify({ 
@@ -143,8 +167,14 @@ serve(async (req) => {
 
   } catch (error) {
     console.error('Error enhancing image:', error)
+    console.error('Error details:', error.message)
+    console.error('Error stack:', error.stack)
+    
     return new Response(
-      JSON.stringify({ error: 'Failed to enhance image' }),
+      JSON.stringify({ 
+        error: 'Failed to enhance image',
+        details: error.message
+      }),
       { 
         status: 500, 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
@@ -152,16 +182,3 @@ serve(async (req) => {
     )
   }
 })
-
-// Simulate image enhancement for demo purposes
-async function simulateEnhancement(imageBase64: string, preset: PresetConfig): Promise<string> {
-  // This is a placeholder - in a real implementation you would:
-  // 1. Use an actual image processing library
-  // 2. Apply the color grading parameters
-  // 3. Or integrate with services like Cloudinary, Adobe APIs, etc.
-  
-  // For now, we'll just return the original image with a slight delay to simulate processing
-  await new Promise(resolve => setTimeout(resolve, 2000))
-  
-  return imageBase64
-}
