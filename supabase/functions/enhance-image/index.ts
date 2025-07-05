@@ -45,27 +45,26 @@ async function enhanceImageWithDeepAI(imageBase64: string, preset: PresetConfig)
     const formData = new FormData()
     formData.append('image', new Blob([imageBuffer], { type: 'image/jpeg' }))
     
-    // Use Deep AI's colorizer or enhancer based on preset
+    // Use Deep AI's colorizer for color-grading, waifu2x for quality enhancement
     let apiEndpoint = 'https://api.deepai.org/api/colorizer'
-    
-    // Map presets to Deep AI endpoints
     if (preset.description.includes('quality') || preset.description.includes('enhancer')) {
       apiEndpoint = 'https://api.deepai.org/api/waifu2x'
-    } else {
-      apiEndpoint = 'https://api.deepai.org/api/colorizer'
     }
+
+    console.log(`Using Deep AI endpoint: ${apiEndpoint}`)
 
     const response = await fetch(apiEndpoint, {
       method: 'POST',
       headers: {
-        'Api-Key': deepAIApiKey,
+        'api-key': deepAIApiKey,
       },
       body: formData
     })
 
     if (!response.ok) {
-      console.error(`Deep AI API error: ${response.statusText}`)
-      throw new Error('Deep AI API request failed')
+      const errorText = await response.text()
+      console.error(`Deep AI API error: ${response.status} ${response.statusText}`, errorText)
+      throw new Error(`Deep AI API request failed: ${response.status}`)
     }
 
     const result = await response.json()
@@ -73,7 +72,13 @@ async function enhanceImageWithDeepAI(imageBase64: string, preset: PresetConfig)
     
     // Download the enhanced image and convert to base64
     if (result.output_url) {
+      console.log('Downloading enhanced image from:', result.output_url)
       const imageResponse = await fetch(result.output_url)
+      
+      if (!imageResponse.ok) {
+        throw new Error('Failed to download enhanced image')
+      }
+      
       const imageArrayBuffer = await imageResponse.arrayBuffer()
       const enhancedBase64 = btoa(String.fromCharCode(...new Uint8Array(imageArrayBuffer)))
       return enhancedBase64
